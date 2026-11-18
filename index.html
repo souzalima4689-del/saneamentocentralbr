@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>saneamentocentralbr — Portal de Inteligência Hídrica & Saneamento 2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            aqua: {
+              50: '#f0f9ff',
+              100: '#e0f2fe',
+              200: '#bae6fd',
+              300: '#7dd3fc',
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              800: '#075985',
+              900: '#0c4a6e',
+              950: '#082f49',
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+    }
+    h1, h2, h3, .font-display {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    input[type="range"] {
+      -webkit-appearance: none;
+      appearance: none;
+      background: transparent;
+      cursor: pointer;
+    }
+    input[type="range"]::-webkit-slider-runnable-track {
+      height: 8px;
+      border-radius: 999px;
+      background: #e2e8f0;
+    }
+    input[type="range"]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      margin-top: -6px;
+      background-color: #0284c7;
+      height: 20px;
+      width: 20px;
+      border-radius: 999px;
+      border: 3px solid #ffffff;
+      box-shadow: 0 2px 6px rgba(2, 132, 199, 0.4);
+      transition: transform 0.15s ease;
+    }
+    input[type="range"]::-webkit-slider-thumb:hover {
+      transform: scale(1.12);
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(226, 232, 240, 0.8);
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-sky-600 selection:text-white">
+
+  <!-- Barra Superior de Aviso Institucional -->
+  <div id="aviso-institucional" class="bg-slate-900 text-slate-200 border-b border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+      <div class="text-xs leading-relaxed">
+        <span class="inline-block bg-sky-500/20 text-sky-300 border border-sky-500/30 font-semibold uppercase tracking-wider px-2 py-0.5 rounded mr-2">
+          Aviso Institucional
+        </span>
+        <p class="inline text-slate-300">
+          O portal <strong class="text-white">saneamentocentralbr</strong> é mantido e patrocinado editorialmente pela empresa <strong class="text-white">Is Industria e Comercio de Moveis e Decoracoes LTDA</strong> (CNPJ: 03.183.830/0001-90). A publicação tem finalidade exclusivamente <strong class="text-white">editorial, informativa e educativa</strong> sobre saneamento básico, saúde pública, higiene ambiental e preservação dos recursos hídricos. Não emitimos cobranças, não prestamos serviços públicos de abastecimento e não temos vínculo com concessionárias governamentais.
+        </p>
+      </div>
+      <button onclick="document.getElementById('aviso-institucional').style.display='none'" class="text-xs text-slate-400 hover:text-white shrink-0 underline">
+        Fechar aviso
+      </button>
+    </div>
+  </div>
+
+  <!-- Header / Navegação Principal -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+      
+      <!-- Logotipo -->
+      <a href="#" class="flex items-center gap-3 group">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-sky-600 to-cyan-500 flex items-center justify-center text-white shadow-md shadow-sky-600/20 group-hover:scale-105 transition-transform">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+          </svg>
+        </div>
+        <span class="font-display font-extrabold text-xl tracking-tight text-slate-900">
+          saneamento<span class="text-sky-600">centralbr</span>
+        </span>
+      </a>
+
+      <!-- Links de Navegação -->
+      <nav class="hidden xl:flex items-center gap-6 text-sm font-medium text-slate-600">
+        <a href="#relacao-empresa" class="hover:text-sky-600 transition-colors">Conexão Institucional</a>
+        <a href="#pilares" class="hover:text-sky-600 transition-colors">Etapas de Tratamento</a>
+        <a href="#simulador" class="hover:text-sky-600 transition-colors">Simulador de Potabilidade</a>
+        <a href="#scanner" class="hover:text-sky-600 transition-colors">Diagnóstico Residencial</a>
+        <a href="#artigos" class="hover:text-sky-600 transition-colors">Guia Editorial</a>
+        <a href="#sobre" class="hover:text-sky-600 transition-colors">Transparência CNPJ</a>
+      </nav>
+
+      <!-- Botão de Contato Rápido -->
+      <a href="tel:+554735129113" class="inline-flex items-center gap-2 bg-sky-50 hover:bg-sky-100 text-sky-800 border border-sky-200 font-semibold text-xs sm:text-sm px-4 py-2.5 rounded-xl transition-colors">
+        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+        Redação: (47) 3512-9113
+      </a>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative overflow-hidden bg-gradient-to-b from-sky-50/90 via-white to-slate-50 pt-12 pb-20 lg:pt-16 lg:pb-24 border-b border-slate-200/70">
+    <div class="absolute inset-0 bg-[radial-gradient(#0284c7_0.75px,transparent_0.75px)] [background-size:24px_24px] opacity-[0.06] pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div class="grid lg:grid-cols-12 gap-12 items-center">
+        
+        <!-- Coluna Esquerda -->
+        <div class="lg:col-span-7 space-y-6">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-100/80 border border-sky-200 text-sky-800 text-xs font-semibold">
+            <span>💧 Portal de Inteligência Hídrica &amp; Saneamento 2026</span>
+          </div>
+
+          <h1 class="text-4xl sm:text-5xl lg:text-[3.25rem] font-extrabold text-slate-900 leading-[1.12] tracking-tight">
+            A engenharia do <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 to-cyan-500">tratamento de água e saneamento</span> explicada.
+          </h1>
+
+          <p class="text-lg text-slate-600 leading-relaxed max-w-2xl">
+            Seu canal informativo independente sobre coagulação, filtração por membranas, estações de tratamento (ETA e ETE), saúde residencial e preservação dos recursos hídricos.
+          </p>
+
+          <!-- Box Destaque Mantenedora -->
+          <div class="bg-white rounded-2xl p-5 border border-sky-100 shadow-sm">
+            <span class="block text-xs font-bold uppercase tracking-wider text-sky-700 mb-1.5">
+              Por que a Is Indústria e Comércio de Móveis apoia este portal?
+            </span>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              A <strong class="text-slate-900">Is Industria e Comercio de Moveis e Decoracoes LTDA</strong> atua na fabricação e comércio de móveis e decorações voltados ao conforto e bem-estar residencial em São Bento do Sul/SC. A saúde no lar e a preservação ambiental estão diretamente ligadas ao saneamento básico e à água tratada.
+            </p>
+          </div>
+
+          <!-- CTAs -->
+          <div class="flex flex-wrap items-center gap-4 pt-2">
+            <a href="#pilares" class="px-6 py-3.5 rounded-xl bg-sky-600 hover:bg-sky-700 text-white font-semibold text-sm shadow-lg shadow-sky-600/25 transition-all">
+              Explorar Processos de Tratamento
+            </a>
+            <a href="#simulador" class="px-6 py-3.5 rounded-xl bg-white hover:bg-slate-50 text-slate-800 border border-slate-300 font-semibold text-sm transition-all">
+              Simulador de Potabilidade
+            </a>
+          </div>
+
+          <!-- Métricas Técnicas -->
+          <div class="grid grid-cols-3 gap-4 pt-4 border-t border-slate-200/80 max-w-lg">
+            <div>
+              <span class="block font-display font-extrabold text-lg sm:text-xl text-slate-900">pH 6.5 - 9.5</span>
+              <span class="text-xs text-slate-500">Portaria Min. Saúde</span>
+            </div>
+            <div>
+              <span class="block font-display font-extrabold text-lg sm:text-xl text-slate-900">ETA / ETE</span>
+              <span class="text-xs text-slate-500">Normas Técnicas</span>
+            </div>
+            <div>
+              <span class="block font-display font-extrabold text-lg sm:text-xl text-slate-900">100%</span>
+              <span class="text-xs text-slate-500">Guia Informativo</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coluna Direita (Card Visual) -->
+        <div class="lg:col-span-5">
+          <div class="bg-white rounded-3xl overflow-hidden border border-slate-200/90 shadow-xl shadow-slate-900/5">
+            <div class="relative h-72 sm:h-80 overflow-hidden bg-slate-800">
+              <img 
+                src="https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?auto=format&fit=crop&w=1000&q=80" 
+                alt="Estação de Tratamento de Água" 
+                class="w-full h-full object-cover"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-900/30 to-transparent"></div>
+              <div class="absolute bottom-5 left-5 right-5 text-white">
+                <span class="inline-block text-xs font-semibold uppercase tracking-wider bg-sky-500/80 backdrop-blur-sm px-2.5 py-1 rounded-md mb-2">
+                  Infraestrutura Sanitária
+                </span>
+                <h3 class="text-xl font-bold leading-snug">Estações de Tratamento de Água (ETA)</h3>
+              </div>
+            </div>
+
+            <div class="p-6 space-y-3">
+              <div class="flex items-center justify-between text-xs font-semibold">
+                <span class="text-slate-500">Padrão Sanitário Recomendado:</span>
+                <span class="text-emerald-600">● Floculação &amp; Cloração</span>
+              </div>
+              <p class="text-sm text-slate-600 leading-relaxed">
+                As estações de tratamento operam processos físico-químicos e microbiológicos contínuos para garantir que a água atinja o grau de potabilidade exigido por lei.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Conexão Institucional -->
+  <section id="relacao-empresa" class="py-20 bg-white border-b border-slate-200/70">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-gradient-to-br from-slate-50 to-sky-50/60 rounded-3xl p-8 sm:p-12 border border-slate-200/80">
+        <div class="grid lg:grid-cols-12 gap-10 items-center">
+          
+          <div class="lg:col-span-7 space-y-5">
+            <span class="inline-block text-xs font-bold uppercase tracking-widest text-sky-600">
+              Entenda a Conexão
+            </span>
+            <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 leading-tight">
+              Por que a Is Indústria e Comércio de Móveis mantém um portal informativo sobre Saneamento?
+            </h2>
+            <div class="space-y-4 text-slate-600 text-sm sm:text-base leading-relaxed">
+              <p>
+                A <strong class="text-slate-900">Is Industria e Comercio de Moveis e Decoracoes LTDA</strong> desenvolve soluções industriais e comerciais dedicadas à saúde, higiene e qualidade de vida nos lares brasileiros, com sede em São Bento do Sul (Santa Catarina).
+              </p>
+              <p>
+                A salubridade residencial e a proteção dos ecossistemas hídricos dependem diretamente do <strong class="text-slate-900">tratamento adequado da água e do esgoto, da prevenção contra umidade contaminada</strong> e da manutenção rigorosa dos reservatórios domésticos.
+              </p>
+              <p>
+                Como parte de sua iniciativa de responsabilidade socioambiental e educativa, a companhia mantém o portal <strong class="text-slate-900">saneamentocentralbr</strong> para disseminar conhecimento técnico sobre potabilidade, processos de saneamento e preservação das águas.
+              </p>
+            </div>
+          </div>
+
+          <div class="lg:col-span-5">
+            <div class="bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm space-y-6">
+              <div class="flex items-center gap-4">
+                <div class="w-12 h-12 rounded-2xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-2xl">
+                  🌿
+                </div>
+                <div>
+                  <strong class="block text-base font-bold text-slate-900">Saúde no Lar &amp; Água Limpa</strong>
+                  <span class="text-xs font-medium text-slate-500">Responsabilidade Socioambiental</span>
+                </div>
+              </div>
+              <ul class="space-y-3.5 text-sm text-slate-700">
+                <li class="flex items-start gap-2.5">
+                  <span class="text-emerald-600 font-bold">✔</span>
+                  <span>Preservação das águas e bacias hidrográficas</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-emerald-600 font-bold">✔</span>
+                  <span>Educação sanitária sobre higiene residencial</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-emerald-600 font-bold">✔</span>
+                  <span>Conscientização sobre limpeza de caixas d'água</span>
+                </li>
+                <li class="flex items-start gap-2.5">
+                  <span class="text-emerald-600 font-bold">✔</span>
+                  <span>Conteúdo 100% gratuito e educativo</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Seção Etapas de Tratamento -->
+  <section id="pilares" class="py-20 bg-slate-50 border-b border-slate-200/70">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-14 space-y-3">
+        <span class="text-xs font-bold uppercase tracking-widest text-sky-600">Processos Sanitários</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900">Etapas Fundamentais de Tratamento e Saneamento</h2>
+        <p class="text-slate-600 text-base">Compreenda a sequência de engenharia necessária para transformar a água bruta em água própria para o consumo humano.</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Card 1 -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-xl bg-sky-50 border border-sky-100 flex items-center justify-center text-2xl">🧪</div>
+            <h3 class="text-lg font-bold text-slate-900">Coagulação &amp; Floculação</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Adição de coagulantes químicos (como sulfato de alumínio) para aglutinar partículas microscópicas em suspensão, formando flocos densos.
+            </p>
+          </div>
+          <div class="pt-5 mt-5 border-t border-slate-100 flex items-center justify-between text-xs font-semibold">
+            <span class="text-slate-500">Fase Físico-Química</span>
+            <span class="text-sky-600 bg-sky-50 px-2.5 py-1 rounded-md">ETA Etapa 1</span>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-xl bg-sky-50 border border-sky-100 flex items-center justify-center text-2xl">🏞️</div>
+            <h3 class="text-lg font-bold text-slate-900">Decantação &amp; Sedimentação</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Separação gravimétrica dos flocos no fundo dos tanques de decantação, reduzindo drasticamente a turbidez da água.
+            </p>
+          </div>
+          <div class="pt-5 mt-5 border-t border-slate-100 flex items-center justify-between text-xs font-semibold">
+            <span class="text-slate-500">Clarificação</span>
+            <span class="text-sky-600 bg-sky-50 px-2.5 py-1 rounded-md">ETA Etapa 2</span>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-xl bg-sky-50 border border-sky-100 flex items-center justify-center text-2xl">🪨</div>
+            <h3 class="text-lg font-bold text-slate-900">Filtração Multicamadas &amp; Carvão</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Passagem da água por camadas de areia, cascalho e carvão ativado para retenção de micropartículas e absorção de sabores e odores.
+            </p>
+          </div>
+          <div class="pt-5 mt-5 border-t border-slate-100 flex items-center justify-between text-xs font-semibold">
+            <span class="text-slate-500">Filtração Física</span>
+            <span class="text-sky-600 bg-sky-50 px-2.5 py-1 rounded-md">ETA Etapa 3</span>
+          </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-xl bg-sky-50 border border-sky-100 flex items-center justify-center text-2xl">✨</div>
+            <h3 class="text-lg font-bold text-slate-900">Desinfecção, Cloração &amp; Fluoretação</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Aplicação de cloro residual livre para eliminação de patógenos (vírus e bactérias) e adição de flúor para proteção da saúde bucal.
+            </p>
+          </div>
+          <div class="pt-5 mt-5 border-t border-slate-100 flex items-center justify-between text-xs font-semibold">
+            <span class="text-slate-500">Potabilização Final</span>
+            <span class="text-sky-600 bg-sky-50 px-2.5 py-1 rounded-md">ETA Etapa 4</span>
+          </div>
+        </div>
+
+        <!-- Card 5 -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-xl bg-emerald-50 border border-emerald-100 flex items-center justify-center text-2xl">🌱</div>
+            <h3 class="text-lg font-bold text-slate-900">Tratamento Biológico de Esgoto (ETE)</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Uso de microrganismos benéficos em tanques de lodos ativados para degradar a matéria orgânica dos efluentes antes do descarte nos rios.
+            </p>
+          </div>
+          <div class="pt-5 mt-5 border-t border-slate-100 flex items-center justify-between text-xs font-semibold">
+            <span class="text-slate-500">Depuração Biológica</span>
+            <span class="text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md">Gestão ETE</span>
+          </div>
+        </div>
+
+        <!-- Card 6 -->
+        <div class="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+          <div class="space-y-4">
+            <div class="w-12 h-12 rounded-xl bg-cyan-50 border border-cyan-100 flex items-center justify-center text-2xl">♻️</div>
+            <h3 class="text-lg font-bold text-slate-900">Reúso de Água &amp; Membranas</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Processos avançados de ultrafiltração e osmose reversa para reciclagem de água e aproveitamento em processos industriais e lavagens.
+            </p>
+          </div>
+          <div class="pt-5 mt-5 border-t border-slate-100 flex items-center justify-between text-xs font-semibold">
+            <span class="text-slate-500">Economia Circular</span>
+            <span class="text-cyan-700 bg-cyan-50 px-2.5 py-1 rounded-md">Sustentabilidade</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Simulador Interativo de Potabilidade -->
+  <section id="simulador" class="py-20 bg-white border-b border-slate-200/70">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-slate-900 rounded-3xl p-8 sm:p-12 text-white shadow-2xl">
+        <div class="max-w-2xl mb-10 space-y-2">
+          <span class="text-xs font-bold uppercase tracking-widest text-sky-400">Ferramenta Interativa</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold">Simulador de Parâmetros de Potabilidade</h2>
+          <p class="text-slate-300 text-sm sm:text-base">
+            Ajuste os seletores abaixo e simule o enquadramento da água nos limites da Portaria de Potabilidade.
+          </p>
+        </div>
+
+        <div class="grid lg:grid-cols-12 gap-8 items-center">
+          <!-- Sliders -->
+          <div class="lg:col-span-7 space-y-6 bg-slate-800/70 p-6 rounded-2xl border border-slate-700/80">
+            <!-- pH -->
+            <div class="space-y-2">
+              <div class="flex justify-between text-sm font-semibold">
+                <span>Potencial Hidrogeniônico (pH)</span>
+                <span id="val-ph" class="text-sky-400 font-mono">7.2</span>
+              </div>
+              <input id="input-ph" type="range" min="4.0" max="11.0" step="0.1" value="7.2" class="w-full" />
+              <span class="block text-xs text-slate-400">Faixa ideal: 6.5 a 9.5</span>
+            </div>
+
+            <!-- Turbidez -->
+            <div class="space-y-2">
+              <div class="flex justify-between text-sm font-semibold">
+                <span>Turbidez (uNT)</span>
+                <span id="val-turb" class="text-sky-400 font-mono">1.2 uNT</span>
+              </div>
+              <input id="input-turb" type="range" min="0.1" max="10.0" step="0.1" value="1.2" class="w-full" />
+              <span class="block text-xs text-slate-400">Limite máximo recomendado: 5.0 uNT</span>
+            </div>
+
+            <!-- Cloro -->
+            <div class="space-y-2">
+              <div class="flex justify-between text-sm font-semibold">
+                <span>Cloro Residual Livre (mg/L)</span>
+                <span id="val-cloro" class="text-sky-400 font-mono">1.5 mg/L</span>
+              </div>
+              <input id="input-cloro" type="range" min="0.0" max="4.0" step="0.1" value="1.5" class="w-full" />
+              <span class="block text-xs text-slate-400">Faixa recomendada: 0.2 a 2.0 mg/L</span>
+            </div>
+          </div>
+
+          <!-- Resultado -->
+          <div id="sim-result-box" class="lg:col-span-5 bg-emerald-950/60 border border-emerald-500/40 rounded-2xl p-6 space-y-4 transition-colors">
+            <span class="block text-xs font-bold uppercase tracking-wider text-slate-300">
+              Resultado da Análise Química Simulada
+            </span>
+            <span id="sim-status" class="block text-2xl font-extrabold text-emerald-400">
+              Água Própria para Consumo
+            </span>
+            <div class="space-y-2 text-sm text-slate-200 pt-2 border-t border-white/10">
+              <p>• pH: <span id="res-ph" class="font-semibold text-emerald-300">Dentro do Padrão</span></p>
+              <p>• Turbidez: <span id="res-turb" class="font-semibold text-emerald-300">Límpida &amp; Transparente</span></p>
+              <p>• Desinfecção: <span id="res-cloro" class="font-semibold text-emerald-300">Protegida contra Patógenos</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Scanner de Qualidade do Reservatório Residencial -->
+  <section id="scanner" class="py-20 bg-slate-50 border-b border-slate-200/70">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12 space-y-3">
+        <span class="text-xs font-bold uppercase tracking-widest text-sky-600">Verificação Prática</span>
+        <h2 class="text-3xl font-extrabold text-slate-900">Scanner de Qualidade do Reservatório Residencial</h2>
+        <p class="text-slate-600 text-sm sm:text-base">
+          Marque os itens observados na sua caixa d'água para checar se é hora de realizar higienização.
+        </p>
+      </div>
+
+      <div class="bg-white rounded-3xl p-6 sm:p-10 border border-slate-200 shadow-sm space-y-8">
+        <!-- Barra de Progresso -->
+        <div class="space-y-2">
+          <div class="flex justify-between items-center text-sm font-bold">
+            <span class="text-slate-700">Nível de Risco Registrado</span>
+            <span id="risk-percent" class="text-emerald-600 text-lg">0%</span>
+          </div>
+          <div class="w-full h-3.5 bg-slate-100 rounded-full overflow-hidden">
+            <div id="risk-bar" class="h-full bg-emerald-500 transition-all duration-300" style="width: 0%"></div>
+          </div>
+          <p id="risk-advice" class="text-xs text-slate-500 pt-1">
+            Reservatório dentro das condições preventivas. Mantenha o cronograma semestral de limpeza.
+          </p>
+        </div>
+
+        <!-- Checkboxes -->
+        <div class="space-y-3">
+          <label class="flex items-start gap-3.5 p-4 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-colors">
+            <input type="checkbox" value="25" class="risk-check mt-1 w-4 h-4 text-sky-600 rounded border-slate-300" />
+            <span class="text-sm text-slate-700 font-medium">A última limpeza da caixa d'água ocorreu há mais de 6 meses.</span>
+          </label>
+          <label class="flex items-start gap-3.5 p-4 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-colors">
+            <input type="checkbox" value="25" class="risk-check mt-1 w-4 h-4 text-sky-600 rounded border-slate-300" />
+            <span class="text-sm text-slate-700 font-medium">Há presença de sedimentos, areia ou lodo no fundo do reservatório.</span>
+          </label>
+          <label class="flex items-start gap-3.5 p-4 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-colors">
+            <input type="checkbox" value="25" class="risk-check mt-1 w-4 h-4 text-sky-600 rounded border-slate-300" />
+            <span class="text-sm text-slate-700 font-medium">A tampa está rachada, solta ou permite entrada de luz solar e insetos.</span>
+          </label>
+          <label class="flex items-start gap-3.5 p-4 rounded-xl border border-slate-200 hover:bg-slate-50 cursor-pointer transition-colors">
+            <input type="checkbox" value="25" class="risk-check mt-1 w-4 h-4 text-sky-600 rounded border-slate-300" />
+            <span class="text-sm text-slate-700 font-medium">A água apresenta coloração turva, odor alterado ou gosto residual estranho.</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Guia Editorial / Últimas Publicações -->
+  <section id="artigos" class="py-20 bg-white border-b border-slate-200/70">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-12 space-y-2">
+        <span class="text-xs font-bold uppercase tracking-widest text-sky-600">Leituras Recomendadas</span>
+        <h2 class="text-3xl font-extrabold text-slate-900">Últimas Publicações do Portal</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Artigo 1 -->
+        <article class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition-all flex flex-col">
+          <div class="h-48 overflow-hidden bg-slate-200">
+            <img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=800&q=80" alt="Limpeza de Caixa d'Água" class="w-full h-full object-cover" />
+          </div>
+          <div class="p-6 space-y-3 flex-1">
+            <span class="inline-block text-xs font-bold text-sky-700 bg-sky-50 px-2.5 py-1 rounded-md">Potabilidade</span>
+            <h3 class="text-lg font-bold text-slate-900 leading-snug">Por que Limpar a Caixa d'Água a Cada 6 Meses?</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Entenda como se forma o biofilme bacteriano nos reservatórios residenciais e os passos para desinfecção adequada.
+            </p>
+          </div>
+        </article>
+
+        <!-- Artigo 2 -->
+        <article class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition-all flex flex-col">
+          <div class="h-48 overflow-hidden bg-slate-200">
+            <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=800&q=80" alt="Análise de Água em Laboratório" class="w-full h-full object-cover" />
+          </div>
+          <div class="p-6 space-y-3 flex-1">
+            <span class="inline-block text-xs font-bold text-cyan-700 bg-cyan-50 px-2.5 py-1 rounded-md">Tecnologia Hídrica</span>
+            <h3 class="text-lg font-bold text-slate-900 leading-snug">Filtros de Carvão Ativado vs. Osmose Reversa</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Comparativo entre sistemas purificadores domésticos e retenção de metais pesados, cloro e microplásticos.
+            </p>
+          </div>
+        </article>
+
+        <!-- Artigo 3 -->
+        <article class="bg-white rounded-2xl overflow-hidden border border-slate-200 shadow-sm hover:shadow-md transition-all flex flex-col">
+          <div class="h-48 overflow-hidden bg-slate-200">
+            <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=800&q=80" alt="Preservação Hídrica" class="w-full h-full object-cover" />
+          </div>
+          <div class="p-6 space-y-3 flex-1">
+            <span class="inline-block text-xs font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md">Saúde Pública</span>
+            <h3 class="text-lg font-bold text-slate-900 leading-snug">O Impacto do Tratamento de Esgoto na Saúde</h3>
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Como a expansão do saneamento básico reduz contaminações e preserva a bacia hidrográfica das cidades.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Transparência Cadastral / Sobre a Mantenedora -->
+  <section id="sobre" class="py-20 bg-slate-50 border-b border-slate-200/70">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200 shadow-sm space-y-8">
+        <div class="space-y-2">
+          <span class="text-xs font-bold uppercase tracking-widest text-sky-600">Transparência Cadastral</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900">Sobre a Mantenedora do Portal</h2>
+        </div>
+
+        <div class="space-y-4 text-slate-600 text-sm sm:text-base leading-relaxed">
+          <p>
+            A publicação e manutenção editorial do portal <strong class="text-slate-900">saneamentocentralbr</strong> são realizadas pela empresa <strong class="text-slate-900">Is Industria e Comercio de Moveis e Decoracoes LTDA</strong>, inscrita no CNPJ sob o nº <strong class="text-slate-900">03.183.830/0001-90</strong>, fundada em <strong class="text-slate-900">27/05/1999</strong> e sediada no bairro <strong class="text-slate-900">Bela Alianca, São Bento do Sul / SC</strong>.
+          </p>
+          <p>
+            Sua atividade principal, conforme a Receita Federal do Brasil, é <strong class="text-slate-900">47.54-7-01 - Comércio varejista de móveis</strong>, mantendo situação cadastral <strong class="text-emerald-700">Ativa</strong> até o momento.
+          </p>
+          <p>
+            <strong class="text-slate-900">Esclarecimento Institucional:</strong> A mantenedora apoia a publicação deste portal estritamente <strong class="text-slate-900">editorial, educativo e informativo</strong> visando promover a educação sanitária, a conscientização sobre a importância da água potável para a saúde residencial e a preservação dos recursos hídricos. O portal não comercializa serviços públicos de saneamento e não possui vínculo governamental.
+          </p>
+        </div>
+
+        <!-- Grid de Dados Cadastrais -->
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80">
+            <span class="block text-xs text-slate-500 mb-1">Razão Social</span>
+            <strong class="text-sm font-bold text-slate-900">Is Industria e Comercio de Moveis e Decoracoes LTDA</strong>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80">
+            <span class="block text-xs text-slate-500 mb-1">CNPJ / Situação</span>
+            <strong class="text-sm font-bold text-slate-900">03.183.830/0001-90 (Ativa)</strong>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80">
+            <span class="block text-xs text-slate-500 mb-1">Município / UF</span>
+            <strong class="text-sm font-bold text-slate-900">São Bento do Sul / SC</strong>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80">
+            <span class="block text-xs text-slate-500 mb-1">Fundação / CNAE</span>
+            <strong class="text-sm font-bold text-slate-900">27/05/1999 • 47.54-7-01</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contato Institucional & Endereço -->
+  <section id="contato" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mb-12 space-y-2">
+        <span class="text-xs font-bold uppercase tracking-widest text-sky-600">Contato Institucional</span>
+        <h2 class="text-3xl font-extrabold text-slate-900">Canais Diretos da Redação</h2>
+      </div>
+
+      <div class="grid lg:grid-cols-2 gap-8">
+        <!-- Coluna Contatos -->
+        <div class="bg-slate-50 rounded-3xl p-8 border border-slate-200/90 space-y-6">
+          <h3 class="text-xl font-bold text-slate-900">Atendimento e E-mail</h3>
+
+          <!-- E-mail -->
+          <div class="flex items-start gap-4 bg-white p-5 rounded-2xl border border-slate-200/80">
+            <div class="w-11 h-11 rounded-xl bg-sky-50 flex items-center justify-center text-xl shrink-0">📧</div>
+            <div>
+              <h4 class="text-sm font-bold text-slate-900">E-mail Institucional</h4>
+              <p class="text-sm text-slate-600 mt-0.5">gerenciamento@moobel.com.br</p>
+              <a href="mailto:gerenciamento@moobel.com.br" class="inline-block mt-2 text-xs font-bold text-sky-600 hover:text-sky-700">
+                Enviar E-mail →
+              </a>
+            </div>
+          </div>
+
+          <!-- Telefones -->
+          <div class="flex items-start gap-4 bg-white p-5 rounded-2xl border border-slate-200/80">
+            <div class="w-11 h-11 rounded-xl bg-sky-50 flex items-center justify-center text-xl shrink-0">📞</div>
+            <div class="space-y-3 w-full">
+              <div>
+                <h4 class="text-sm font-bold text-slate-900">Telefone Fixo</h4>
+                <p class="text-sm text-slate-600 mt-0.5">(47) 3512-9113</p>
+                <a href="tel:+554735129113" class="inline-block mt-1 text-xs font-bold text-sky-600 hover:text-sky-700">
+                  Ligar Agora →
+                </a>
+              </div>
+
+              <div class="pt-3 border-t border-slate-100">
+                <h4 class="text-sm font-bold text-slate-900">Telefone / WhatsApp</h4>
+                <p class="text-sm text-slate-600 mt-0.5">(47) 98473-3449</p>
+                <div class="flex flex-wrap items-center gap-4 mt-1.5">
+                  <a href="tel:+5547984733449" class="text-xs font-bold text-sky-600 hover:text-sky-700">
+                    Ligar →
+                  </a>
+                  <a href="https://wa.me/5547984733449" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-emerald-600 hover:text-emerald-700">
+                    Abrir WhatsApp →
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coluna Localização -->
+        <div class="bg-slate-50 rounded-3xl p-8 border border-slate-200/90 space-y-6">
+          <h3 class="text-xl font-bold text-slate-900">Endereço Oficial da Mantenedora</h3>
+
+          <div class="bg-white p-6 rounded-2xl border border-slate-200/80 space-y-2.5 text-sm text-slate-700">
+            <p><strong class="text-slate-900">Logradouro:</strong> Rua Theodoro Ziebarth, 225</p>
+            <p><strong class="text-slate-900">Complemento:</strong> Galpao01 Sala 01</p>
+            <p><strong class="text-slate-900">Bairro:</strong> Bela Alianca</p>
+            <p><strong class="text-slate-900">CEP:</strong> 89284-040</p>
+            <p><strong class="text-slate-900">Município / Estado:</strong> São Bento do Sul – Santa Catarina (SC)</p>
+          </div>
+
+          <div class="bg-sky-50/70 p-6 rounded-2xl border border-sky-100 space-y-2">
+            <span class="block text-xs font-bold uppercase tracking-wider text-sky-800">
+              Para Correspondência:
+            </span>
+            <div class="text-sm text-slate-700 leading-relaxed font-medium">
+              Is Industria e Comercio de Moveis e Decoracoes LTDA<br />
+              Rua Theodoro Ziebarth 225 Galpao01 Sala 01<br />
+              Bela Alianca<br />
+              São Bento do Sul SC — 89284-040
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Rodapé -->
+  <footer class="bg-slate-950 text-slate-400 py-14 border-t border-slate-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 pb-8 border-b border-slate-800">
+        <div class="space-y-2">
+          <span class="font-display font-extrabold text-xl text-white">
+            saneamento<span class="text-sky-500">centralbr</span>
+          </span>
+          <p class="text-sm text-slate-400 max-w-md">
+            Portal informativo sobre recursos hídricos e saneamento mantido por entidade privada.
+          </p>
+        </div>
+        <div class="flex flex-wrap gap-5 text-xs font-medium text-slate-300">
+          <a href="#relacao-empresa" class="hover:text-white">Conexão Institucional</a>
+          <a href="#pilares" class="hover:text-white">Etapas de Tratamento</a>
+          <a href="#simulador" class="hover:text-white">Simulador</a>
+          <a href="#sobre" class="hover:text-white">Transparência CNPJ</a>
+          <a href="#contato" class="hover:text-white">Contato</a>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 text-xs text-slate-500">
+        <p>© 2026 saneamentocentralbr — Todos os direitos reservados.</p>
+        <p>Is Industria e Comercio de Moveis e Decoracoes LTDA — CNPJ 03.183.830/0001-90</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts Interativos (Simulador & Scanner) -->
+  <script>
+    // Simulador de Potabilidade
+    const inputPh = document.getElementById('input-ph');
+    const inputTurb = document.getElementById('input-turb');
+    const inputCloro = document.getElementById('input-cloro');
+
+    function updateSimulator() {
+      const ph = parseFloat(inputPh.value);
+      const turb = parseFloat(inputTurb.value);
+      const cloro = parseFloat(inputCloro.value);
+
+      document.getElementById('val-ph').textContent = ph.toFixed(1);
+      document.getElementById('val-turb').textContent = turb.toFixed(1) + ' uNT';
+      document.getElementById('val-cloro').textContent = cloro.toFixed(1) + ' mg/L';
+
+      const phOk = ph >= 6.5 && ph <= 9.5;
+      const turbOk = turb <= 5.0;
+      const cloroOk = cloro >= 0.2 && cloro <= 2.0;
+
+      const resPh = document.getElementById('res-ph');
+      const resTurb = document.getElementById('res-turb');
+      const resCloro = document.getElementById('res-cloro');
+      const simStatus = document.getElementById('sim-status');
+      const simBox = document.getElementById('sim-result-box');
+
+      resPh.textContent = phOk ? 'Dentro do Padrão' : 'Fora da Faixa Ideal';
+      resPh.className = phOk ? 'font-semibold text-emerald-300' : 'font-semibold text-amber-300';
+
+      resTurb.textContent = turbOk ? 'Límpida & Transparente' : 'Turbidez Elevada';
+      resTurb.className = turbOk ? 'font-semibold text-emerald-300' : 'font-semibold text-amber-300';
+
+      resCloro.textContent = cloroOk ? 'Protegida contra Patógenos' : (cloro < 0.2 ? 'Cloração Insuficiente' : 'Excesso de Cloro Residual');
+      resCloro.className = cloroOk ? 'font-semibold text-emerald-300' : 'font-semibold text-amber-300';
+
+      if (phOk && turbOk && cloroOk) {
+        simStatus.textContent = 'Água Própria para Consumo';
+        simStatus.className = 'block text-2xl font-extrabold text-emerald-400';
+        simBox.className = 'lg:col-span-5 bg-emerald-950/60 border border-emerald-500/40 rounded-2xl p-6 space-y-4 transition-colors';
+      } else {
+        simStatus.textContent = 'Requer Correção / Tratamento';
+        simStatus.className = 'block text-2xl font-extrabold text-amber-400';
+        simBox.className = 'lg:col-span-5 bg-amber-950/50 border border-amber-500/40 rounded-2xl p-6 space-y-4 transition-colors';
+      }
+    }
+
+    inputPh.addEventListener('input', updateSimulator);
+    inputTurb.addEventListener('input', updateSimulator);
+    inputCloro.addEventListener('input', updateSimulator);
+
+    // Scanner do Reservatório Residencial
+    const checks = document.querySelectorAll('.risk-check');
+    const riskPercent = document.getElementById('risk-percent');
+    const riskBar = document.getElementById('risk-bar');
+    const riskAdvice = document.getElementById('risk-advice');
+
+    checks.forEach(chk => {
+      chk.addEventListener('change', () => {
+        let total = 0;
+        checks.forEach(c => { if (c.checked) total += parseInt(c.value, 10); });
+
+        riskPercent.textContent = total + '%';
+        riskBar.style.width = total + '%';
+
+        if (total === 0) {
+          riskPercent.className = 'text-emerald-600 text-lg';
+          riskBar.className = 'h-full bg-emerald-500 transition-all duration-300';
+          riskAdvice.textContent = 'Reservatório dentro das condições preventivas. Mantenha o cronograma semestral de limpeza.';
+        } else if (total <= 50) {
+          riskPercent.className = 'text-amber-600 text-lg';
+          riskBar.className = 'h-full bg-amber-500 transition-all duration-300';
+          riskAdvice.textContent = 'Atenção recomendada: programe a inspeção e higienização do reservatório nos próximos dias.';
+        } else {
+          riskPercent.className = 'text-rose-600 text-lg';
+          riskBar.className = 'h-full bg-rose-600 transition-all duration-300';
+          riskAdvice.textContent = 'Risco elevado de contaminação: recomenda-se limpeza e desinfecção imediata da caixa d\'água.';
+        }
+      });
+    });
+  </script>
+</body>
+</html>
